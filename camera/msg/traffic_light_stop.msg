@@ -1,0 +1,2 @@
+int32 stop_flag
+int32 bbox_size

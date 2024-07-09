@@ -1,0 +1,7 @@
+<launch>
+    <include file="$(find lidar)/launch/lidar_final.launch"/>
+    <include file="$(find camera)/launch/camera_with_multicam.launch"/>
+
+    <node name="decision" pkg="control" type="test_traffic_decision.py" output="screen" launch-prefix="gnome-terminal --command"/>
+
+</launch>

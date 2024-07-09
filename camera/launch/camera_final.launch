@@ -1,0 +1,8 @@
+<launch>
+    <include file="$(find usb_cam)/launch/multi_usb_cam.launch"/>
+
+    <node name="yolo_node" pkg="camera" type="yolo_final.py"/>
+    <node name="decoder_node" pkg="camera" type="traffic_light_color_decoder_final.py" output="screen" launch-prefix="gnome-terminal --command"/>
+    <node name="crosswalk_node" pkg="camera" type="crosswalk_detection_node_final.py" output="screen" launch-prefix="gnome-terminal --command"/>
+    
+</launch>

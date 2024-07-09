@@ -1,0 +1,7 @@
+<launch>
+    <include file="$(find rplidar_ros)/launch/rplidar_a2m8.launch"/>
+
+    <node name="cluster_pub" pkg="lidar" type="lidar_cluster_pub.py"/>
+    <node name="obstacle_detection" pkg="lidar" type="lidar_lanechange_flag.py"/>
+    
+</launch>
