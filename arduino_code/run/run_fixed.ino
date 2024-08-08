@@ -21,11 +21,8 @@ int motor_front_2 = 6;
 
 int analogPin = A4;
 
-
-int power_L = 80; //parking.ino에서 따온 값
-int power_R = 75; 
-//int power_L = 100; -> 원래 코드에 적혀있던 값
-//int power_R = 102;
+int power_L = 80;
+int power_R = 75;
 //int power_L = 122;
 //int power_R = 125;
 // left power 170
@@ -36,8 +33,6 @@ int val_min;
 int val_mid;
 
 int power = 150;
-
-int once=1;
 
 //초음파 센서
 int TR_Rfront = 8; //오른쪽 앞
@@ -69,6 +64,8 @@ int TR_Lback = 18; //왼쪽 뒤
 int EC_Lback = 19;
 long Lback_dist;
 float Lback_ctrl;
+
+int once=1;
 
 void forward(){
   motor_forward(motor_right_1, motor_right_2, power_R);
