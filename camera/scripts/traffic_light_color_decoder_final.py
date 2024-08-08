@@ -56,7 +56,7 @@ class TrafficLightDecoder:
 
             print("[Traffic Light Decoder] traffic light detected")  
             
-            if(self.traffic_light_color == 'TL_red' or self.traffic_light_color == "TL_yellow") : # 감지된 신호등이 red 또는 yellow이면
+            if(self.traffic_light_color == 'red'): # 감지된 신호등이 red이면
                 
                 [xmin, ymin, xmax, ymax] = self.bbox
                 bbox_size = (xmax-xmin) * (ymax-ymin) # bbox의 크기 계산
