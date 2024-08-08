@@ -1,0 +1,16 @@
+<launch>
+    <!-- Include the existing rplidar launch file -->
+    <include file="$(find rplidar_ros)/launch/rplidar_a2m8.launch"/>
+
+    <!-- Run the cluster publisher node -->
+    <node name="cluster_pub" pkg="lidar" type="lidar_cluster_pub.py" output="screen"/>
+
+    <!-- Run the obstacle detection node -->
+    <node name="obstacle_detection" pkg="lidar" type="lidar_lanechange_flag.py" output="screen"/>
+
+    <!-- Run the RViz visualization node for lidar cluster results -->
+    <node name="rviz_visualization" pkg="lidar" type="lidar_cluster_sub_rviz.py" output="screen" />
+
+    <!-- Optionally, you can add RViz itself if not already running -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find lidar)/rviz/lidar_config.rviz" output="screen"/>
+</launch>

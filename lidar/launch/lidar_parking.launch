@@ -1,0 +1,9 @@
+<launch>
+    <include file="$(find rplidar_ros)/launch/rplidar_a2m12.launch"/>
+    <include file="$(find race)/launch/rosserial.launch"/>
+
+    <node name="cluster_pub" pkg="lidar" type="lidar_parking_cluster_pub.py"/>
+    <node name="parking_lidar" pkg="lidar" type="lidar_parking_flag.py"/>
+    <node name="parking_decision" pkg="control" type="parking_node.py"/>
+    
+</launch>
