@@ -18,7 +18,7 @@ class ControlCommand() :
         
         rospy.init_node('decision', anonymous=True)
 
-        rospy.Subscriber('Steer_value', Int16, self.End_to_steer_callback)
+        rospy.Subscriber('Steering_value', Int16, self.End_to_steer_callback)
         
         self.Steer_value = Int16()
         
