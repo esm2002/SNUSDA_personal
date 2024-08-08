@@ -1,0 +1,47 @@
+## 노트북 시스템 사양
+
+# 2024.07.12.오전 기준
+
+driver == 535.183.06
+python == 3.8.10
+CUDA == 12.2.140
+cuDNN == 8.9.7
+Tensorflow == (시스템에 설치 안 되었다고 뜸)
+pytorch == (시스템에 설치 안 되었다고 뜸)
+
+
+*플랜 1 -> 기각.
+cuda == 12.2
+cuDNN == 8.9.7
+tensorflow == 2.15.0 (단, 파이썬 3.9-11만 지원하므로, 가상환경에다가 별도로 파이썬 3.9를 설치해서 거기에다가 텐서플로우 2.15.0 설치해야 함)
+pytorch == 설치 못함!!! (cuda 12.2를 지원하는 파이토치 출시 안 됨. stack overflow에도 안 나옴)
+
+**플랜 2 -> 기각.
+cuda == 12.1
+cuDNN
+python == 
+tensorflow -> cuda 12.1을 지원하는 텐서플로우가 없음.
+pytorch == 2.2.1
+
+**내가 볼 땐 깃헙 리드미에 나온 파이썬 버전(소스코드에서 파이썬 라이브러리 쓰니까), 텐서플로우, 파이토치 버전 맞추는 게 cuda, cudnn 버전 맞추는 것보다 더 중요함. ROS는 cuda, cudnn에 의존하지 않음. 그러나 딥러닝 모델을 가져올 때에는 패키지가 호환이 잘 되어야 함.
+
+**플랜 3 -> 시도
+python == 3.8.10
+cuda == 11.8
+cuDNN == 8.6
+nvidia driver == 520.61.05 (이게 cuda 11.8과 호환이 잘 되는 건데, 이것보다 버전이 높아도 상관 없음)
+tensorflow == 2.13.1
+pytorch == 2.2.1
+
+# 터미널 기록
+1. nvidia, cuda, cudnn 및 tensorflow, pytorch 가상환경 삭제
+2. cuda toolkit과 nvidia driver 동시 설치
+->하지만 cuda toolkit 설치 시 드라이버를 설치 실패했다고 떠서, 드라이버 535.183.01를 먼저 설치하고 cuda toolkit 11.8 다운로드 진행.
+3. cuDNN 8.6 설치 ->code sample 돌려본 결과 제대로 설치됨.
+4. tensorflow 2.13.1 설치 -> 완료.
+5. Pytorch 2.2.1 설치 (공식문서 들어가서 pip 명령어 복붙) -> pytorch 2.2.1에서 networkX 라이브러리가 파이썬 3.9 이상부터 지원한다는 에러가 뜸. 하지만 networkX는 파이썬 3.8이 지원하는 라이브러리로 별도로 설치해도 상관없다고 해서(공식 큐앤에이 참고 - https://discuss.pytorch.org/t/installing-pytorch-under-python-3-8-question-about-networkx-version/196740), 그것만 별개로 설치할 예정. pip install networkx==3.1 명령어로 설치 완료함. 
+
+6. 텐서플로우 정상 설치 확인 python3 -c "import tensorflow as tf; print(tf.__version__)" 실행: 2.13.1 설치 완료. 그러나 Warning: Could not find TensorRT이 뜸. 만약 소스코드 돌려볼 때 텐서플로우 문제 생기면 이 문제부터 해결해보기.
+
+7. 파이토치 정상 설치 확인 pip show torch 실행: 이게 어떤 이유로 파이토치 패키지 정보를 확인할 수 없다고 뜨는데, 파이토치 설치 자체는 networkx 제외하고 잘 되었고, 이후에 networkx도 버전 낮춰서 잘 설치했다고 뜸. 일단 소스코드 돌려보도록 하자.
+
